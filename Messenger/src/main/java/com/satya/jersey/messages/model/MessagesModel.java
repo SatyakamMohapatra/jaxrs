@@ -1,5 +1,7 @@
 package com.satya.jersey.messages.model;
 
+import java.util.Date;
+
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
@@ -8,18 +10,18 @@ public class MessagesModel {
 	private Long MessageID;
 	private String MessageBody;
 	private String MessageAuthor;
-	private String MessageTime;
+	private String MessageTime                    ;
 	
 	public MessagesModel() {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public MessagesModel(Long messageID, String messageBody, String messageAuthor, String messageTime) {
+	public MessagesModel(Long messageID, String messageBody, String messageAuthor) {
 		super();
 		MessageID = messageID;
 		MessageBody = messageBody;
 		MessageAuthor = messageAuthor;
-		MessageTime = messageTime;
+		MessageTime = new Date().toString();
 	}
 	public Long getMessageID() {
 		return MessageID;
@@ -39,12 +41,15 @@ public class MessagesModel {
 	public void setMessageAuthor(String messageAuthor) {
 		MessageAuthor = messageAuthor;
 	}
+
 	public String getMessageTime() {
 		return MessageTime;
 	}
+
 	public void setMessageTime(String messageTime) {
 		MessageTime = messageTime;
 	}
+
 	
 	
 }
