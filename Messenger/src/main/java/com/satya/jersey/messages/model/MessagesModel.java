@@ -1,8 +1,14 @@
 package com.satya.jersey.messages.model;
 
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+
+import org.eclipse.persistence.internal.databaseaccess.DatabaseAccessor;
 
 @XmlRootElement
 public class MessagesModel {
@@ -10,7 +16,8 @@ public class MessagesModel {
 	private Long MessageID;
 	private String MessageBody;
 	private String MessageAuthor;
-	private Date MessageTime                    ;
+	private Date MessageTime;
+	static private Map<Long, CommentModel> comments = new HashMap<Long, CommentModel>();
 	
 	public MessagesModel() {
 		// TODO Auto-generated constructor stub
@@ -21,7 +28,7 @@ public class MessagesModel {
 		MessageID = messageID;
 		MessageBody = messageBody;
 		MessageAuthor = messageAuthor;
-		MessageTime = new Date().toString();
+		MessageTime = new Date();
 	}
 	public Long getMessageID() {
 		return MessageID;
@@ -42,12 +49,20 @@ public class MessagesModel {
 		MessageAuthor = messageAuthor;
 	}
 
-	public String getMessageTime() {
+	public Date getMessageTime() {
 		return MessageTime;
 	}
 
-	public void setMessageTime(String messageTime) {
+	public void setMessageTime(Date messageTime) {
 		MessageTime = messageTime;
+	}
+	@XmlTransient
+	public Map<Long, CommentModel> getComments() {
+		return comments;
+	}
+
+	public void setComments(Map<Long, CommentModel> comments) {
+		this.comments = comments;
 	}
 
 	
