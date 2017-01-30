@@ -1,6 +1,7 @@
 package com.satya.jersey.messages.services;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -19,6 +20,14 @@ public class MessagesServices {
 	
 	public List<MessagesModel> getAllMessages(){
 		return new ArrayList<MessagesModel>(messages.values());
+	}
+	
+	public List<MessagesModel> getAllMessagesByYear(int year){
+		List<MessagesModel> messagesByYear = new ArrayList<>();
+		Calendar cal = Calendar.getInstance();
+		for(MessagesModel msg : messages.values()){
+			cal.setTime(msg.getMessageTime());
+		}
 	}
 	
 	public MessagesModel getMessages(Long MessageID){

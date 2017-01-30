@@ -10,7 +10,7 @@ public class MessagesModel {
 	private Long MessageID;
 	private String MessageBody;
 	private String MessageAuthor;
-	private String MessageTime                    ;
+	private Date MessageTime                    ;
 	
 	public MessagesModel() {
 		// TODO Auto-generated constructor stub
