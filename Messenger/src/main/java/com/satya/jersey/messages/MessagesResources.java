@@ -1,5 +1,6 @@
 package com.satya.jersey.messages;
 
+import java.net.URI;
 import java.util.Date;
 import java.util.List;
 
@@ -13,11 +14,18 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriBuilder;
+import javax.ws.rs.core.UriInfo;
 
 import com.satya.jersey.messages.beans.ParamBeans;
 import com.satya.jersey.messages.model.MessagesModel;
 import com.satya.jersey.messages.services.MessagesServices;
+import com.sun.jndi.toolkit.url.Uri;
+
+import sun.awt.image.URLImageSource;
 
 @Path("/messages")
 @Consumes(MediaType.APPLICATION_JSON)
@@ -46,8 +54,11 @@ public class MessagesResources {
     }
     
     @POST
-    public MessagesModel addMessage(MessagesModel messagesModel){
-    	return services.addMessages(messagesModel);
+    public Response addMessage(MessagesModel messagesModel,@Context UriInfo uriInfo){
+    	MessagesModel model=services.addMessages(messagesModel);
+        URI uri = uriInfo.getAbsolutePathBuilder().path(model.getMessageID().toString()).build();
+        System.out.println(uri.toString());
+       return Response.created(uri).entity(messagesModel).build();
     }
     
     @PUT
