@@ -17,8 +17,6 @@ public class CommentsServices {
 	private Map<Long, MessagesModel> messages = DatabaseClass.getMessages();
 	
 	public CommentsServices() {
-		messages.get(1l).getComments().put(1l,new CommentModel(1L,"Comment Satya","Satya"));
-		messages.get(1l).getComments().put(2l,new CommentModel(2L,"Comment Satya","Satya"));
 	}
 	
 	public List<CommentModel> getAllComments(Long messagesID){
