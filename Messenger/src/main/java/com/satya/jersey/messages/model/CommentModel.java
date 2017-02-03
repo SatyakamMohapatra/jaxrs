@@ -2,6 +2,9 @@ package com.satya.jersey.messages.model;
 
 import java.util.Date;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement
 public class CommentModel {
 	private Long   commentID;
 	private String commentBody;
@@ -10,8 +13,6 @@ public class CommentModel {
 	
 	public CommentModel() {
 	}
-	
-	
 	
 	public CommentModel(Long commentID, String commentBody, String commentAuthor) {
 		super();

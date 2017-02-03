@@ -21,6 +21,7 @@ import javax.ws.rs.core.UriBuilder;
 import javax.ws.rs.core.UriInfo;
 
 import com.satya.jersey.messages.beans.ParamBeans;
+import com.satya.jersey.messages.exception.MessageNotFoundException;
 import com.satya.jersey.messages.model.MessagesModel;
 import com.satya.jersey.messages.services.MessagesServices;
 import com.sun.jndi.toolkit.url.Uri;
@@ -35,7 +36,7 @@ public class MessagesResources {
 	MessagesServices services =new MessagesServices();
 	
     @GET
-    public List<MessagesModel> getXMLMesages(@BeanParam ParamBeans beans) {
+    public List<MessagesModel> getMesages(@BeanParam ParamBeans beans) {
     	if(beans.getYear()>0){
     		return services.getAllMessagesByYear(beans.getYear());
     	}
@@ -50,7 +51,11 @@ public class MessagesResources {
     @Path("/{messagesID}")
     public MessagesModel getMessageByID(@PathParam("messagesID") Long messagesID){
     	System.out.println("recived id is "+messagesID);
-		return services.getMessages(messagesID);
+    	MessagesModel messagesModel = services.getMessages(messagesID);
+    	if (messagesModel == null) {
+			throw new MessageNotFoundException("messagesID "+messagesID+" Not Found");
+		}
+		return messagesModel;
     }
     
     @POST

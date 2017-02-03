@@ -6,9 +6,6 @@ import java.util.Map;
 
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
-
-import org.eclipse.persistence.internal.databaseaccess.DatabaseAccessor;
 
 @XmlRootElement
 public class MessagesModel {
@@ -17,7 +14,8 @@ public class MessagesModel {
 	private String MessageBody;
 	private String MessageAuthor;
 	private Date MessageTime;
-	static private Map<Long, CommentModel> comments = new HashMap<Long, CommentModel>();
+	@XmlTransient
+	private Map<Long, CommentModel> comments = new HashMap<Long, CommentModel>();
 	
 	public MessagesModel() {
 		// TODO Auto-generated constructor stub
