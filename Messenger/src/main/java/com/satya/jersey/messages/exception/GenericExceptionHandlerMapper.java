@@ -3,7 +3,6 @@ package com.satya.jersey.messages.exception;
 import java.util.StringTokenizer;
 
 import javax.ws.rs.core.Response;
-import javax.ws.rs.core.Response.Status;
 import javax.ws.rs.ext.ExceptionMapper;
 import javax.ws.rs.ext.Provider;
 

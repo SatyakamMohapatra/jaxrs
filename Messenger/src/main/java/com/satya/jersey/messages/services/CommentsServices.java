@@ -2,11 +2,8 @@ package com.satya.jersey.messages.services;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import javax.ws.rs.PathParam;
 
 import com.satya.jersey.messages.dao.DatabaseClass;
 import com.satya.jersey.messages.model.CommentModel;

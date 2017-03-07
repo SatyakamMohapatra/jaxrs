@@ -13,20 +13,15 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import javax.ws.rs.core.UriBuilder;
 import javax.ws.rs.core.UriInfo;
 
 import com.satya.jersey.messages.beans.ParamBeans;
 import com.satya.jersey.messages.exception.MessageNotFoundException;
 import com.satya.jersey.messages.model.MessagesModel;
 import com.satya.jersey.messages.services.MessagesServices;
-import com.sun.jndi.toolkit.url.Uri;
-
-import sun.awt.image.URLImageSource;
 
 @Path("/messages")
 @Consumes(MediaType.APPLICATION_JSON)
