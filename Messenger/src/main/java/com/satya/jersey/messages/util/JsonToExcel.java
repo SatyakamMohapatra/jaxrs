@@ -4,11 +4,9 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Arrays;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
-
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -21,7 +19,7 @@ public class JsonToExcel {
 		
 		XSSFWorkbook workbook = new XSSFWorkbook();
 		XSSFSheet sheet = workbook.createSheet("Emp Details");
-		Map<String, List<String>> empObjs = new HashMap<String, List<String>>();
+		Map<String, List<String>> empObjs = new LinkedHashMap<String, List<String>>();
 		
 		//Dummy empObj added -- it can be commented out--------
 		empObjs.put("Emp Name",Arrays.asList("Satya","Ram"));
@@ -35,7 +33,7 @@ public class JsonToExcel {
 		Row HeaderRow = sheet.createRow(rowNo++);
 		int cellNo = 0;
 		for(String key : empObjs.keySet()){
-			Cell cell = HeaderRow.createCell(cellNo);
+			Cell cell = HeaderRow.createCell(cellNo++);
 			cell.setCellValue((String) key);
 		}
 		//End of Printing Header ROW----------------------
@@ -47,9 +45,11 @@ public class JsonToExcel {
 			for(String value:emp.getValue()){
 				
 				int rownum=1;
-				if(sheet.getRow(rownum+1)!=null){
+				if(sheet.getRow(rownum+1) != null){
+					System.out.println("Row exits");
 					row= sheet.getRow(rownum+1);
 				}else{
+					System.out.println("Row doesnot exits");
 					row= sheet.createRow(rownum++);
 				}
 				Cell cell=row.createCell(cellNo);
