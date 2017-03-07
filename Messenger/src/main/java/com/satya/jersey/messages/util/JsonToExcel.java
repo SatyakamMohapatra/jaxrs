@@ -19,11 +19,11 @@ public class JsonToExcel {
 		
 		XSSFWorkbook workbook = new XSSFWorkbook();
 		XSSFSheet sheet = workbook.createSheet("Emp Details");
-		Map<String, List<String>> empObjs = new LinkedHashMap<String, List<String>>();
+		Map<String, List<Object>> empObjs = new LinkedHashMap<String, List<Object>>();
 		
 		//Dummy empObj added -- it can be commented out--------
 		empObjs.put("Emp Name",Arrays.asList("Satya","Ram"));
-		empObjs.put("Emp ID", Arrays.asList("1","2"));
+		empObjs.put("Emp ID", Arrays.asList(1,2));
 		//End of Dummy empObj added -- it can be commented out-
 		
 		System.out.println("Creating Excel Object");
@@ -41,10 +41,9 @@ public class JsonToExcel {
 		//Printing Remaining Row
 		cellNo = 0; //Reseting Cell Counter 
 		Row row;
-		for (Map.Entry<String,List<String>> emp : empObjs.entrySet()) {
-			for(String value:emp.getValue()){
-				
-				int rownum=1;
+		int rownum=1;
+		for (Map.Entry<String,List<Object>> emp : empObjs.entrySet()) {
+			for(Object value:emp.getValue()){
 				if(sheet.getRow(rownum+1) != null){
 					System.out.println("Row exits");
 					row= sheet.getRow(rownum+1);
@@ -53,9 +52,17 @@ public class JsonToExcel {
 					row= sheet.createRow(rownum++);
 				}
 				Cell cell=row.createCell(cellNo);
-				cell.setCellValue(value);
-				cellNo++;
+				System.out.println(value);
+				
+				if(value instanceof String){
+					cell.setCellValue((String)value);
+				}if(value instanceof Integer){
+					cell.setCellValue((Integer)value);
+				}
+				
 			}
+			rownum=1;
+			cellNo++;
 		}
 		//End of Printing Remaining Row------------------
 		FileOutputStream fos = null;
