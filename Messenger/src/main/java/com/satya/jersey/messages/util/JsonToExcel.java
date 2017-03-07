@@ -22,8 +22,8 @@ public class JsonToExcel {
 		Map<String, List<Object>> empObjs = new LinkedHashMap<String, List<Object>>();
 		
 		//Dummy empObj added -- it can be commented out--------
-		empObjs.put("Emp Name",Arrays.asList("Satya","Ram"));
-		empObjs.put("Emp ID", Arrays.asList(1,2));
+		empObjs.put("Emp Name",Arrays.asList("Satya","Ram","Sam","qaz"));
+		empObjs.put("Emp ID", Arrays.asList(13,2,45,56));
 		//End of Dummy empObj added -- it can be commented out-
 		
 		System.out.println("Creating Excel Object");
@@ -46,7 +46,7 @@ public class JsonToExcel {
 			for(Object value:emp.getValue()){
 				if(sheet.getRow(rownum+1) != null){
 					System.out.println("Row exits");
-					row= sheet.getRow(rownum+1);
+					row= sheet.getRow(rownum+1);	
 				}else{
 					System.out.println("Row doesnot exits");
 					row= sheet.createRow(rownum++);
