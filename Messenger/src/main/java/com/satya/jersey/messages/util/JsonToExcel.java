@@ -23,46 +23,55 @@ public class JsonToExcel {
 		
 		//Dummy empObj added -- it can be commented out--------
 		empObjs.put("Emp Name",Arrays.asList("Satya","Ram","Sam","qaz"));
-		empObjs.put("Emp ID", Arrays.asList(13,2,45,56));
+		empObjs.put("Emp ID", Arrays.asList(13,2,45,55));
 		//End of Dummy empObj added -- it can be commented out-
 		
 		System.out.println("Creating Excel Object");
 		
-		//Printing Header ROW
+		
+		Cell cell = null;
 		int rowNo = 0;
-		Row HeaderRow = sheet.createRow(rowNo++);
+		//Printing Header ROW
+		Row row = sheet.createRow(rowNo++);
 		int cellNo = 0;
+		
 		for(String key : empObjs.keySet()){
-			Cell cell = HeaderRow.createCell(cellNo++);
+			
+			//cell= row.createCell(cellNo++);
+			cell= row.createCell(cellNo++);
 			cell.setCellValue((String) key);
+			System.out.println(row.getLastCellNum());
 		}
 		//End of Printing Header ROW----------------------
 		
 		//Printing Remaining Row
 		cellNo = 0; //Reseting Cell Counter 
-		Row row;
-		int rownum=1;
+		rowNo =1;
 		for (Map.Entry<String,List<Object>> emp : empObjs.entrySet()) {
+			
 			for(Object value:emp.getValue()){
-				if(sheet.getRow(rownum+1) != null){
+				if(sheet.getRow(rowNo+1) != null){
 					System.out.println("Row exits");
-					row= sheet.getRow(rownum+1);	
+					row= sheet.getRow(rowNo++);	
 				}else{
 					System.out.println("Row doesnot exits");
-					row= sheet.createRow(rownum++);
+					row= sheet.createRow(rowNo++);
 				}
-				Cell cell=row.createCell(cellNo);
+				if(row.getCell(cellNo) != null){
+					System.out.println("cell doesnot exits");
+				}
+				cell=row.createCell(cellNo);
 				System.out.println(value);
 				
 				if(value instanceof String){
 					cell.setCellValue((String)value);
-				}if(value instanceof Integer){
+				}else if(value instanceof Integer){
 					cell.setCellValue((Integer)value);
 				}
-				
 			}
-			rownum=1;
 			cellNo++;
+			rowNo=1;
+			
 		}
 		//End of Printing Remaining Row------------------
 		FileOutputStream fos = null;
